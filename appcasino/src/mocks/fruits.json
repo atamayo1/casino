@@ -1,0 +1,8 @@
+{
+    "fruits": [
+        {"name": "cereza"},
+        {"name": "limon"},
+        {"name": "naranja"},
+        {"name": "sandia"}
+    ]
+}
