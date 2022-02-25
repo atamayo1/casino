@@ -10,9 +10,9 @@ import { GeneralStyle } from './LayoutHome.styled'
 
 const LayoutHome = () => {
   const [titleOfTable] = useState('TRAGA MONEDAS')
-  const [numberRandomOne, setNumerRandomOne] = useState()
-  const [numberRandomTwo, setNumerRandomTwo] = useState()
-  const [numberRandomThree, setNumerRandomThree] = useState()
+  const [numberRandomOne, setNumerRandomOne] = useState(null)
+  const [numberRandomTwo, setNumerRandomTwo] = useState(null)
+  const [numberRandomThree, setNumerRandomThree] = useState(null)
   const [fruitSelectedOne, setFruitSelectedOne] = useState()
   const [fruitSelectedTwo, setFruitSelectedTwo] = useState()
   const [fruitSelectedThree, setFruitSelectedThree] = useState()
@@ -27,7 +27,7 @@ const LayoutHome = () => {
   const [activeDisableCashOut, setActiveDisableCashOut] = useState(false)
 
   useEffect(() => {
-    if (numberRandomOne && numberRandomTwo && numberRandomThree) {
+    if (numberRandomOne !== null && numberRandomTwo !== null && numberRandomThree !== null) {
       setTimeout(() => {
         switch (listOfFruits.fruits[numberRandomOne]?.id) {
           case 'C':
