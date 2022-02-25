@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { TotalCredits } from './Credits.styled'
+import { ContentCredits, TotalCredits } from './Credits.styled'
 
 const Credits = ({
   symbolIdOne,
@@ -7,7 +7,7 @@ const Credits = ({
   symbolIdThree,
   totalCredit,
   setTotalCredit,
-  setLoadingFruits,
+  myCash,
 }) => {
   useEffect(() => {
     if (symbolIdOne === 'C' && symbolIdTwo === 'C' && symbolIdThree === 'C') {
@@ -30,14 +30,15 @@ const Credits = ({
       symbolIdThree === 'S'
     ) {
       setTotalCredit(totalCredit + 40)
-    } else if (symbolIdOne && symbolIdTwo && symbolIdThree) {
+    } else {
       setTotalCredit(totalCredit - 1)
     }
   }, [symbolIdOne, symbolIdThree, symbolIdTwo])
   return (
-    <>
-      <TotalCredits>Total Credits: ${totalCredit}</TotalCredits>
-    </>
+    <ContentCredits>
+      <TotalCredits>Total Credits: {totalCredit}</TotalCredits>
+      <TotalCredits>Cash: ${myCash}</TotalCredits>
+    </ContentCredits>
   )
 }
 

@@ -10,8 +10,16 @@ import {
 } from './TableSymbols.styled'
 import { ReactComponent as Spinner } from '../../assets/svg/spinner.svg'
 
-const TableSymbols = ({ titleOfTable, loadingFruits, symbols, handlePlayGames, totalCredit }) => {
-
+const TableSymbols = ({
+  titleOfTable,
+  loadingFruits,
+  symbols,
+  handlePlayGames,
+  totalCredit,
+  handleCashOut,
+  activeAnimationCashOut,
+  activeDisableCashOut,
+}) => {
   return (
     <GeneralStyle>
       <TitleTable>{titleOfTable}</TitleTable>
@@ -51,8 +59,12 @@ const TableSymbols = ({ titleOfTable, loadingFruits, symbols, handlePlayGames, t
             )}
           </>
         )}
-        <ButtonPlay onClick={handlePlayGames} disabled={totalCredit === 0}>Play</ButtonPlay>
-        <ButtonCashOut onClick={handlePlayGames} disabled={totalCredit === 0}>Cash Out</ButtonCashOut>
+        <ButtonPlay onClick={handlePlayGames} disabled={totalCredit === 0}>
+          Play
+        </ButtonPlay>
+        <ButtonCashOut randomX={Math.floor(Math.random()*300)} randomY={Math.floor(Math.random()*300)} activeAnimationCashOut={activeAnimationCashOut} onClick={handleCashOut} disabled={totalCredit === 0 || activeDisableCashOut}>
+          Cash Out
+        </ButtonCashOut>
       </TableRow>
     </GeneralStyle>
   )

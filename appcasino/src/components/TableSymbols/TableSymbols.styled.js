@@ -20,13 +20,13 @@ export const ContentColumn = styled.div`
     width: 10em;
     height: 10em;
     border-radius: 5px;
+    margin-right: 1em;
     background-color: #795548;
 `
 
 export const IconFruits = styled.img`
     width: 10em;
     height: 10em;
-    margin-top: ${({id}) => id === 'N' ? '3em' : 'inherit'};
 `
 
 export const ButtonPlay = styled.button`
@@ -38,7 +38,6 @@ export const ButtonPlay = styled.button`
     margin-top: 1em;
     border-radius: 99px;
     color: #fff;
-    margin-left: 1em;
     &:hover{
         cursor: pointer;
         opacity: 0.7;
@@ -55,10 +54,12 @@ export const ButtonCashOut = styled.button`
     border-radius: 99px;
     color: #fff;
     margin-left: 1em;
+    transform: translate();
     &:hover{
         cursor: pointer;
         opacity: 0.7;
     }
+    transform: ${({activeAnimationCashOut, randomX, randomY}) => activeAnimationCashOut ? `translate(${randomX}px, ${randomY}px)` : `inherit`};
 `
 
 export const TitleTable = styled.div`

@@ -9,7 +9,7 @@ import SandiaIcon from '../assets/svg/sandia.svg'
 import Credits from '../components/Credits/Credits'
 
 const LayoutHome = () => {
-  const [titleOfTable] = useState('CASINO')
+  const [titleOfTable] = useState('TRAGA MONEDAS')
   const [numberRandomOne, setNumerRandomOne] = useState(null)
   const [numberRandomTwo, setNumerRandomTwo] = useState(null)
   const [numberRandomThree, setNumerRandomThree] = useState(null)
@@ -18,10 +18,13 @@ const LayoutHome = () => {
   const [fruitSelectedThree, setFruitSelectedThree] = useState()
   const [symbols, setSymbols] = useState([])
   const [loadingFruits, setLoadingFruits] = useState(false)
-  const [totalCredit, setTotalCredit] = useState(10)
+  const [totalCredit, setTotalCredit] = useState(11)
   const [symbolIdOne, setSymbolIdOne] = useState()
   const [symbolIdTwo, setSymbolIdTwo] = useState()
   const [symbolIdThree, setSymbolIdThree] = useState()
+  const [myCash, setMyCash] = useState()
+  const [activeAnimationCashOut, setActiveAnimationCashOut] = useState(false)
+  const [activeDisableCashOut, setActiveDisableCashOut] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
@@ -80,19 +83,11 @@ const LayoutHome = () => {
     }, 3000)
   }, [numberRandomOne, numberRandomThree, numberRandomTwo])
 
-  let handlePlayGames = () => {
-    setLoadingFruits(true)
-    setNumerRandomOne(Math.floor(Math.random() * 5))
-    setNumerRandomTwo(Math.floor(Math.random() * 5))
-    setNumerRandomThree(Math.floor(Math.random() * 5))
-  }
-
   useEffect(() => {
     if (fruitSelectedOne && fruitSelectedTwo && fruitSelectedThree) {
       setSymbolIdOne(listOfFruits.fruits[numberRandomOne]?.id)
       setSymbolIdTwo(listOfFruits.fruits[numberRandomTwo]?.id)
       setSymbolIdThree(listOfFruits.fruits[numberRandomThree]?.id)
-
       setSymbols([
         {
           id: listOfFruits.fruits[numberRandomOne]?.id,
@@ -114,6 +109,43 @@ const LayoutHome = () => {
     }
   }, [fruitSelectedOne, fruitSelectedTwo, fruitSelectedThree])
 
+  useEffect(() => {
+    if(totalCredit >= 40 && totalCredit <= 60){
+      let random_boolean = Math.random() < 0.3
+      if(random_boolean){
+        handlePlayGames()
+      }
+    }
+    if(totalCredit > 60){
+      let random_boolean = Math.random() < 0.6
+      if(random_boolean){
+        handlePlayGames()
+      }
+    }
+  }, [totalCredit])
+
+  let handlePlayGames = () => {
+    if(myCash){
+      setTotalCredit(myCash)
+      setMyCash(0)
+    }
+    setLoadingFruits(true)
+    setNumerRandomOne(Math.floor(Math.random() * 5))
+    setNumerRandomTwo(Math.floor(Math.random() * 5))
+    setNumerRandomThree(Math.floor(Math.random() * 5))
+  }
+
+  let handleCashOut = () => {
+    let random_boolean_animation = Math.random() < 0.5
+    let random_boolean_disable = Math.random() < 0.4
+
+    setActiveAnimationCashOut(random_boolean_animation)
+    setActiveDisableCashOut(random_boolean_disable)
+
+    setMyCash(totalCredit)
+    setTotalCredit(0)
+  }
+
   return (
     <GeneralStyle>
       <TableSymbols
@@ -122,6 +154,9 @@ const LayoutHome = () => {
         symbols={symbols}
         handlePlayGames={handlePlayGames}
         totalCredit={totalCredit}
+        handleCashOut={handleCashOut}
+        activeAnimationCashOut={activeAnimationCashOut}
+        activeDisableCashOut={activeDisableCashOut}
       />
       <Credits
         symbolIdOne={symbolIdOne}
@@ -129,7 +164,7 @@ const LayoutHome = () => {
         symbolIdThree={symbolIdThree}
         setTotalCredit={setTotalCredit}
         totalCredit={totalCredit}
-        setLoadingFruits={setLoadingFruits}
+        myCash={myCash}
       />
     </GeneralStyle>
   )
