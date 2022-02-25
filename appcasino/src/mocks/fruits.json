@@ -1,8 +1,8 @@
 {
     "fruits": [
-        {"name": "cereza"},
-        {"name": "limon"},
-        {"name": "naranja"},
-        {"name": "sandia"}
+        {"id": "C", "name": "cereza"},
+        {"id": "L", "name": "limon"},
+        {"id": "N", "name": "naranja"},
+        {"id": "S", "name": "sandia"}
     ]
 }

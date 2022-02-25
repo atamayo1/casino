@@ -1,33 +1,58 @@
 import React, { useEffect, useState } from 'react'
 import {
+  ButtonCashOut,
+  ButtonPlay,
   ContentColumn,
   GeneralStyle,
   IconFruits,
   TableRow,
+  TitleTable,
 } from './TableSymbols.styled'
+import { ReactComponent as Spinner } from '../../assets/svg/spinner.svg'
 
-const TableSymbols = ({
-  nameOne,
-  nameTwo,
-  nameThree,
-  fruitSelectedOne,
-  fruitSelectedTwo,
-  fruitSelectedThree,
-}) => {
-  useEffect(() => {}, [])
+const TableSymbols = ({ titleOfTable, loadingFruits, symbols, handlePlayGames, totalCredit }) => {
 
   return (
     <GeneralStyle>
+      <TitleTable>{titleOfTable}</TitleTable>
       <TableRow>
-        <ContentColumn>
-          <IconFruits src={fruitSelectedOne} alt={nameOne} />
-        </ContentColumn>
-        <ContentColumn>
-          <IconFruits src={fruitSelectedTwo} alt={nameTwo} />
-        </ContentColumn>
-        <ContentColumn>
-          <IconFruits src={fruitSelectedThree} alt={nameThree} />
-        </ContentColumn>
+        {symbols.length > 0 && !loadingFruits ? (
+          symbols.map((element) => {
+            return (
+              <ContentColumn>
+                <IconFruits
+                  src={element.uri}
+                  alt={element.name}
+                  id={element.id}
+                />
+              </ContentColumn>
+            )
+          })
+        ) : (
+          <>
+            {loadingFruits ? (
+              <>
+                <ContentColumn>
+                  <Spinner style={{ width: '7em' }} />
+                </ContentColumn>
+                <ContentColumn>
+                  <Spinner style={{ width: '7em' }} />
+                </ContentColumn>
+                <ContentColumn>
+                  <Spinner style={{ width: '7em' }} />
+                </ContentColumn>
+              </>
+            ) : (
+              <>
+                <ContentColumn></ContentColumn>
+                <ContentColumn></ContentColumn>
+                <ContentColumn></ContentColumn>
+              </>
+            )}
+          </>
+        )}
+        <ButtonPlay onClick={handlePlayGames} disabled={totalCredit === 0}>Play</ButtonPlay>
+        <ButtonCashOut onClick={handlePlayGames} disabled={totalCredit === 0}>Cash Out</ButtonCashOut>
       </TableRow>
     </GeneralStyle>
   )
