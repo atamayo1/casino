@@ -1,10 +1,10 @@
 import './App.css';
-import LayoutHome from './containers/LayoutHome';
+import LayoutHome from './containers/LayoutHome/LayoutHome'
 
 function App() {
   return (
     <div className="App">
-      <LayoutHome></LayoutHome>
+      <LayoutHome />
     </div>
   );
 }
