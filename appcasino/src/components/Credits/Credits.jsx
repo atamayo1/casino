@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ContentCredits, TotalCredits } from './Credits.styled'
+import { ContentCredits, TotalCash, TotalCredits } from './Credits.styled'
 
 const Credits = ({
   symbolIdOne,
@@ -37,7 +37,7 @@ const Credits = ({
   return (
     <ContentCredits>
       <TotalCredits>Total Credits: {totalCredit}</TotalCredits>
-      <TotalCredits>Cash: ${myCash}</TotalCredits>
+      <TotalCash>Cash: ${myCash}</TotalCash>
     </ContentCredits>
   )
 }

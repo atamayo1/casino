@@ -6,7 +6,8 @@ import LimonIcon from '../../assets/svg/limon.svg'
 import NaranjaIcon from '../../assets/svg/naranja.svg'
 import SandiaIcon from '../../assets/svg/sandia.svg'
 import Credits from '../../components/Credits/Credits'
-import { GeneralStyle } from './LayoutHome.styled'
+import { ContainContent, GeneralStyle } from './LayoutHome.styled'
+import ImageBackground from '../../assets/traga-monedas-background.jpeg'
 
 const LayoutHome = () => {
   const [titleOfTable] = useState('TRAGA MONEDAS')
@@ -27,7 +28,11 @@ const LayoutHome = () => {
   const [activeDisableCashOut, setActiveDisableCashOut] = useState(false)
 
   useEffect(() => {
-    if (numberRandomOne !== null && numberRandomTwo !== null && numberRandomThree !== null) {
+    if (
+      numberRandomOne !== null &&
+      numberRandomTwo !== null &&
+      numberRandomThree !== null
+    ) {
       setTimeout(() => {
         switch (listOfFruits.fruits[numberRandomOne]?.id) {
           case 'C':
@@ -149,7 +154,15 @@ const LayoutHome = () => {
   }
 
   return (
-    <GeneralStyle>
+    <GeneralStyle ImageBackground={ImageBackground}>
+      <Credits
+        symbolIdOne={symbolIdOne}
+        symbolIdTwo={symbolIdTwo}
+        symbolIdThree={symbolIdThree}
+        setTotalCredit={setTotalCredit}
+        totalCredit={totalCredit}
+        myCash={myCash}
+      />
       <TableSymbols
         titleOfTable={titleOfTable}
         loadingFruits={loadingFruits}
@@ -159,14 +172,6 @@ const LayoutHome = () => {
         handleCashOut={handleCashOut}
         activeAnimationCashOut={activeAnimationCashOut}
         activeDisableCashOut={activeDisableCashOut}
-      />
-      <Credits
-        symbolIdOne={symbolIdOne}
-        symbolIdTwo={symbolIdTwo}
-        symbolIdThree={symbolIdThree}
-        setTotalCredit={setTotalCredit}
-        totalCredit={totalCredit}
-        myCash={myCash}
       />
     </GeneralStyle>
   )
